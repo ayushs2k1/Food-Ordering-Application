@@ -1,31 +1,45 @@
-# QEats - Online Food Ordering Backend
+# Food Ordering Backend
 
-Built a distributed system backend for food order platform, QEats, with **Java Spring Boot** and **MongoDB**. The system does caching using **Redis** and to further speed up database queries, they are run using **multi-threading**. We can easily deploy the solution to the Cloud using its **Docker** image.
+## Overview
+Built a distributed system backend food ordering app with **Java Spring Boot** and **MongoDB**. The system does caching using **Redis** and to further speed up database queries, they are run using **multi-threading**. We can easily deploy the solution to the Cloud using its **Docker** image that allows users to browse and order their favorite dishes from nearby restaurants. 
+During the course of this project,
 
-### [✅ API Documentation](https://documenter.getpostman.com/view/6299642/2s9Y5bQ1Uc)
+I had build different parts of the application backend which is a Spring Boot application.
+Several REST API endpoints were implemented to query restaurant information and place food orders.
+To give a sense of real-world problems, production issues were investigated using Scientific Debugging methods.
+Along with this, I improved the app performance under large load scenarios as well as included an advanced search feature in the app. 
 
-## APIs
-- `GetRestaurants`
-- `GetMenu`
-- `GetCart`
-- `AddItem`
-- `DeleteItem`
-- `PlaceOrder`
+## Retrieved restaurant data for a given user location
+### Scope of Work
+Implemented GET /API/v1/restaurants and the corresponding request handler and response methods.
+Used Mockito to enable the development of the relevant MVCS layers independently.
+Retrieved a list of restaurants from MongoDB based on a user location.
 
-![Postman API Docs](assets/postman_api_docs.png)
-<h4 align="center"> Postman API Docs </h4>
+### Skills used
+Spring Boot, Spring Data, REST API, Jackson, Mockito, JUnit, MongoDB
 
-## Installation
+![](media/api_response.png)
 
-> Make sure you have [Docker](https://docs.docker.com/get-docker/) installed and running
+## Replicated performance issues and solved them using caching strategies
+### Scope of Work
+Employed JMeter or load testing to expose performance issues.
+Identified DB queries contributing to degradation in performance.
+Used a Redis cache to alleviate read performance.
 
-1. Go to [qeats/Packages](https://github.com/AbhishekChd/qeats/pkgs/container/qeats)
-2. Download latest version like: `docker pull ghcr.io/abhishekchd/qeats:latest`
-3. Create a `.env` file to define `LATITUDE` and `LONGITUDE` to localize data
-4. Run: `docker compose -f docker-compose.yml -p qeats up -d`
-5. Open: [localhost:8080/swagger-ui.html](localhost:8080/swagger-ui.html#/)
+### Skills used
+Redis, JMeter
 
+https://github.com/user-attachments/assets/a970ccb0-413d-44fa-b6c6-d03e17cd13a7
 
-![Swagger UI](assets/swagger_ui.png)
-<h4 align="center"> Swagger UI </h4>
+## Performed search operations using custom attributes
+### Scope of Work
+Used MongoDB queries to enable users to search for restaurants using attributes like name, cuisine, dish, and price.
+Used multithreading to increase the number of concurrent searches that can be performed.
+
+### Skills used
+MongoDB querying, Multithreading
+
+![](media/search1.png)
+![](media/search2.png)
+![](media/search3.png)
 
